@@ -1,0 +1,24 @@
+site_name: Machine Learning Fundamentals
+nav:
+    - Home: index.md
+    - Regression: regression.md
+    - SVM: svm.md
+    - Kernel: kernel.md
+    - Logistic Regression: lr.md
+    - Random Forest: rf.md
+    - Bayesian Optimal Predictor: bayesian.md
+    - Dimension Reduction: dr.md
+    - Clustering: cluster.md
+    - Gaussian Mixture Model: gmm.md
+    - Imbalanced Data: imbdata.md
+    - Missing Data: miss.md
+    - Optimization: optimization.md
+    - NLP: nlp.md
+theme: readthedocs
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
