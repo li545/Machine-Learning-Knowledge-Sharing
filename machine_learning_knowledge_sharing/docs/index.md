@@ -40,6 +40,7 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
     * K-Means
     * K-Means++
 * Gaussian Mixture Model
+* EM Algorithm
 * Imbalanced Data
 * Missing Data
 * Optimization 

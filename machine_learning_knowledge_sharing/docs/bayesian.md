@@ -38,4 +38,10 @@ Moverover,
 $$
 P(Y|X) = \int_{\omega}P(y|x, w)P(w|\mathcal{D})dw
 $$
+Bayes Optimal Classifier is, 
+
+$$
+\hat{y} = argmax_{y}P(Y|X) = argmax_{y}\sum_{h}P(y|h)P(h|\mathcal{D})
+$$
+
 where $w$ represents model parameters and $\mathcal{D}$ represents data. Bayesian prediction can be viewed as a weighted average over all possible hypotheses (models) and $P(w|\mathcal{D})$ is served as weights. When data is supporting a particular set of model parameters, its corresponding hypothesis has high impacts on final prediction. 

@@ -80,7 +80,19 @@ $$
 & = \frac{1}{1+e^{-f_{1}(x)}e^{-(d-1)log\mu}}
 \end{split}
 \end{equation}
-with $\mu = \frac{P(x_{1}|y=1)}{P(x_{1}|y=0)}$. $P(y=1|x)$ will grow quickly towards 1 as $d$ increases when $\mu \ge 1$ . As a result, the model will generate a lot of false positives, as it predicts almost every case as positive.
+with $\mu = \frac{P(x_{1}|y=1)}{P(x_{1}|y=0)}$. 
+
+* $\mu > 1$, i.e., $log\mu > 0$ 
+
+$P(y=1|x)$ will grow quickly towards 1 as $d$ increases. As a result, the model will generate a lot of false positives, as it predicts almost every case as positive.
+
+* $\mu < 1$, i.e., $log\mu < 0$ 
+
+$P(y=1|x)$ will grow quickly towards 0 as $d$ increases. As a result, the model will generate a lot of false negatives, as it predicts almost every case as negative.
+
+* $\mu = 1$, i.e., $log\mu = 0$ 
+
+$\sigma(f_{1}(x)) = \sigma(f_{d}(x))$
 
 #### Gaussian Bayes Classifier
 
@@ -90,7 +102,7 @@ $$
 P(x|y) \sim \mathcal{N}(x;\mu_{y}, \Sigma_{y})
 $$
 
-with $\Sigma_{y}$ could be any positive semi-definite matrix. In GNBC, $\Sigma_{y}$ is diagnal because of conditional independence. When all classes share a constant feature variance, GNBC is equivalent to Linear Discriminant Analysis.
+with $\Sigma_{y}$ could be any positive semi-definite matrix. In GNBC, $\Sigma_{y}$ is diagnal because of conditional independence. When all classes share a constant feature variance, GBC is equivalent to Linear Discriminant Analysis.
 
 #### Gaussian Mixtures
 
@@ -124,9 +136,28 @@ $$
 
 * Question: K-Means VS Hard-EM?
 
-K-Means is a special case of hard-em when 
+K-Means is a special case of hard-EM when 
 
-$w_{1} = w_{2} = \cdots = w_{K} = \frac{1}{K}$ and $\Sigma_{1} = \Sigma_{2} = \cdots = \Sigma_{K} = \mathcal{I}$
+$w_{1} = w_{2} = \cdots = w_{K} = \frac{1}{K}$ and $\Sigma_{1} = \Sigma_{2} = \cdots = \Sigma_{K} = \mathcal{I}$ because
+
+distance between any data $x_{i}$ and any cluster center $\mu_{j}$ in K-Means is defined by $L_{2}$-norm, i.e., 
+
+$$
+d(x_{i}, \mu_{j}) = \lVert x_{i}-\mu_{j} \rVert^{2}_{2} = (x_{i}-\mu_{j})^{T}(x_{i} - \mu_{j})
+$$
+
+The distance can be written as a Mahalanobis-distance, 
+
+$$
+d(x_{i}, \mu_{j}) = (x_{i}-\mu_{j})^{T}\Sigma^{-1}(x_{i} - \mu_{j})
+$$
+with $\Sigma = I$
+
+Probability density of any data $x_{i}$ with $k$-dimensional Multivariate Gaussian distribution is determined by Mahalanobis-distance, 
+
+$$
+p(x_{i}|\mu, \Sigma) = \frac{1}{\sqrt{(2\pi)^{k}| \Sigma|}}e^{(x_{i}-\mu)^{T}\Sigma^{-1}(x_{i} - \mu)}
+$$
 
 ##### Soft EM
 
@@ -138,7 +169,7 @@ $$
 
 For each iteration,
 
-i. E-step: compute log-likelihood of complete data
+i. E-step: compute $\gamma_{j}(x)$
 
 $$
 \mathcal{D}^{(t)} = \{(x_{1}, z_{1}^{(t)}), \cdots, (x_{n}, z_{n}^{(t)}) \}
@@ -161,7 +192,7 @@ iii. $\Sigma_{1} = \cdots = \Sigma_{K} = \frac{1}{n}\sum_{i}(X_{i}-\bar{X})(X_{i
 * Infer class membership for unlabelled data with 
 
 $$
-\gamma_{j}(x_{i}) = P(z_{i} = j|x_{i}, \theta)
+\gamma_{j}(x_{i}) = P(z_{i} = j|x_{i}, \theta) = \frac{w_{j}p(x_{i}|z_{i}=j, \theta)}{\sum_{k}w_{k}p(x_{i}|z_{i}=k,\theta)}
 $$
 
 * Update MLE on $\theta$ until algorithm converges.
@@ -196,7 +227,7 @@ Suppose fit a GMM with only 1 data point. The model will overfit as $\sigma^{2} 
 
 Solution:
 
-i. applying a wishart prior on $\sigma$. Wishart distribution is a multivariate generation of Gamma distribution.
+i. applying a wishart prior on $\sigma$. Wishart distribution is a multivariate generalization of Gamma distribution.
 
 ii. adding a small quantity $\nu$ to $\Sigma_{j}^{(t)}$, i.e., 
 

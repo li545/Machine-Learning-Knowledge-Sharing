@@ -3,7 +3,7 @@
 $\mathcal{D}_{n} = \{x_{1}, \cdots, x_{n} \}$ with $x_{i} \in \mathbb{R}^{d}$, find $w \in \mathbb{R}^{d\times k}$<br>
 
 $$
-w^{\ast} = argmin_{\lVert w \rVert_{2} = 1}\sum_{i=1}^{n}\lVert z_{i}w - x_{i} \rVert_{2}^{2}
+w^{\ast} = argmin_{\lVert w \rVert_{2} = 1}\sum_{i=1}^{n}\lVert wz_{i} - x_{i} \rVert_{2}^{2}
 $$
 with 
 $w$ orthogonal (i.e., $w^{-1} = w^{T}$). 
@@ -15,7 +15,7 @@ with $z_{i} \in \mathbb{R}^{k}$ and $k << d$.
 $$
 \begin{equation}
 \begin{split}
-\lVert z_{i}w - x_{i} \rVert_{2}^{2} & = (x_{i}-ww^{T}x_{i})^{T}(x_{i}-ww^{T}x_{i})\\
+\lVert wz_{i} - x_{i} \rVert_{2}^{2} & = (x_{i}-ww^{T}x_{i})^{T}(x_{i}-ww^{T}x_{i})\\
 & = x_{i}^{T}x_{i} - 2x_{i}^{T}ww^{T}x_{i} + x_{i}^{T}ww^{T}ww^{T}x_{i} \\
 & = x_{i}^{T}x_{i} - 2x_{i}^{T}ww^{T}x_{i} + x_{i}^{T}ww^{T}x_{i} \\
 & = x_{i}^{T}x_{i} - x_{i}^{T}ww^{T}x_{i} \\
@@ -27,7 +27,7 @@ $$
 $$
 \begin{equation}
 \begin{split}
-w^{\ast} & = argmin_{\lVert w \rVert_{2} = 1}\sum_{i=1}^{n}\lVert z_{i}w - x_{i} \rVert_{2}^{2} \\ 
+w^{\ast} & = argmin_{\lVert w \rVert_{2} = 1}\sum_{i=1}^{n}\lVert wz_{i} - x_{i} \rVert_{2}^{2} \\ 
 & = argmax_{\lVert w \rVert_{2} = 1}\sum_{i}(w^{T}x_{i})(w^{T}x_{i})^{T} \\
 & = argmax_{\lVert w \rVert_{2} = 1}w^{T}\Sigma w
 \end{split}
@@ -56,6 +56,11 @@ $$
 
 with $v_{i} \in \mathbb{R}^{d}$ and $\lVert v_{i} \rVert_{2} = 1$ and $v_{i}^{T}v_{j} = 0$ for $i \neq j$.
 
+How to choose $K$?
+
+* For feature induction: by cross-validation
+* For other purpose: picking $K$ such that the most variance in target is explained.
+
 ##### Autoencoder <br>
 ![Screenshot](img/autoencoder.png)
 
@@ -75,7 +80,12 @@ $$
 \hat{x} = f_{2}(a; w_{2}) = \phi^{(2)}(w_{2}a)
 $$
 
-if $\phi^{(1)}$ is linear, namely, $\phi^{(1)}(w_{1}x) = w_{1}x$, the encoder is the same as PCA.
+if the activation function $\phi$ is linear, namely, 
+
+$\phi^{(1)}(w_{1}x) = w_{1}x$ and 
+$\phi^{(2)}(w_{2}x) = w_{2}x$, 
+
+the optimal solution $w^{\ast}_{1}$ of the NN is the same as PCA. Consequently, $w_{2} = w^{T}_{1}$
 
 #### Suppervised Dimension Reduction
 
@@ -108,3 +118,5 @@ $\mathbf{Step 3}$: Solving the generalized eigenvalue problem for the matrix $S^
 $\mathbf{Step 4}$: Selecting linear discriminants for the new feature subspace by sorting the eigenvectors in decreasing order of eigenvalues.<br>
 
 $\mathbf{Step 5}$: Transforming the samples onto the new subspace.
+
+$\mathbf{Note}$: LDA projects data onto a line that is orthogonal to a hyperplane that best separates two classes. LDA reduces original data to 1-D space.

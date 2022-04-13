@@ -34,4 +34,42 @@ $$
 l(z) = log(1+e^{-z})
 $$
 
-* Minimizing negative log likelihood with softmax likelihood (for multi-classfication) results in cross entropy.
+* When there are more than 2 classes, logistic loss is extended to cross-entropy.
+
+$$
+l(y, \hat{y}) = -\sum_{i=1}^{K}y_{i}log(\hat{y}_{i})
+$$
+with K classes
+
+$\textbf{Categorical Cross-Entropy}$
+
+Categorical Cross-Entropy is used when true labels are one-hot encoded.
+
+![Screenshot](img/cross-entropy.png)
+
+$\textbf{Sparse Categorical Cross-Entropy}$
+
+Sparse Categorical Cross-Entropy is used when true labels are single value encoded, e.g., [1], [2], etc. Calculation is pretty straight forward, 
+
+- taking true labels as index to get elements in predicted labels (prob) at corresponding positions
+- applying log function on the predicted labels (prob) and averaging over all observations in a batch.
+
+![Screenshot](img/sparse_ce.png)
+
+$$
+1.177 = -(log(0.95) + log(0.1))/2
+$$
+
+#### Cross Entropy Loss VS KL-Divergence Loss
+
+Entropy measures how much information (in bits) required to represent an event drawn from a probability distribution (e.g., weather forecast for tomorrow's weather). 
+
+Cross-Entropy measures how much information on average required to represent an event drawn from one distribution (P) compared to another distribution (Q).
+
+KL-Divergence measures how much extra information on average required to represent an event drawn from one distribution compared to another one.
+
+$$
+KL-Divergence(P, Q) = Cross-Entropy(P, Q) - Entropy(P) 
+$$
+
+In machine learning, P is true distribution and Q is predicted distribution. Lower cross-entropy implies higher chance of approximating the true probability with the predicted probability. Both Cross-Entropy and KL-Divergence quantify difference between two distributions and they are asymmetric. 

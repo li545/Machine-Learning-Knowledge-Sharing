@@ -51,7 +51,7 @@ Benefits
 
 #### Second Order Methods
 
-Hessian Matrix $Hl(w;x,y)$ is a square matrix of the second order partial derivative of loss function w.r.t weights. ntuitively, the Hessian describes the local curvature of the loss function, which allows us to perform a more efficient update. In particular, multiplying by the inverse Hessian leads the optimization to take more aggressive steps in directions of shallow curvature and shorter steps in directions of steep curvature. <br>
+Hessian Matrix $Hl(w;x,y)$ is a square matrix of the second order partial derivative of loss function w.r.t weights. Intuitively, the Hessian describes the local curvature of the loss function, which allows us to perform a more efficient update. In particular, multiplying by the inverse Hessian leads the optimization to take more aggressive steps in directions of shallow curvature and shorter steps in directions of steep curvature. <br>
 
 $$
 w \leftarrow w - [Hl(w;x,y)]^{-1}\nabla_{w}l(w;x, y)

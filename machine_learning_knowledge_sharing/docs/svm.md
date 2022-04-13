@@ -39,7 +39,7 @@ $$
 $x_{i}x_{j}$ can be replaced by $k(x_{i}, x_{j})$ 
 
 $$
-\hat{\alpha} = argmin_{\alpha \in \mathbb{R}}\frac{1}{n}\sum_{i=1}^{n}max(0, -\sum_{j}\alpha_{j}y_{i}y_{j}x_{i}x_{j})
+\hat{\alpha} = argmin_{\alpha \in \mathbb{R}}\frac{1}{n}\sum_{i=1}^{n}max(0, -\sum_{j}\alpha_{j}y_{i}y_{j}k(x_{i},x_{j}))
 $$
 
 $$

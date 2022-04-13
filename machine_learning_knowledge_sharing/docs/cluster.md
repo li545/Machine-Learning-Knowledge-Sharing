@@ -41,7 +41,7 @@ $$
 K-Means projects every data point to center of cluster it belongs to and hence can be used for data compression. Similar to PCA, find $w \in \mathbb{R}^{d\times k}$ such that<br>
 
 $$
-w^{\ast} = argmin_{w}\sum_{i=1}^{n}\lVert z_{i}w - x_{i} \rVert_{2}^{2}
+w^{\ast} = argmin_{w}\sum_{i=1}^{n}\lVert wz_{i} - x_{i} \rVert_{2}^{2}
 $$
 
 Consequently,<br>

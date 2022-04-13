@@ -10,6 +10,7 @@ nav:
     - Dimension Reduction: dr.md
     - Clustering: cluster.md
     - Gaussian Mixture Model: gmm.md
+    - EM Algorithm: em.md
     - Imbalanced Data: imbdata.md
     - Missing Data: miss.md
     - Optimization: optimization.md

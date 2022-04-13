@@ -45,8 +45,8 @@ $$
 Var(\beta_{1}X + \beta_{2}X) = Var((\beta_{1}+\beta_{2})X) = (\beta_{1}+\beta_{2})^{2}Var(X) > \beta_{1}^{2}Var(X)
 $$
 as $\beta_{1}$ and $\beta_{2}$ have the same signs, since correlation between $X$ and $Y$ does not change.
-* Mean Absolute Error measures proportion of error in target values.
+* Mean Absolute Percent Error measures proportion of error in target values.
 $$
-\epsilon = \frac{\|y-\hat{y}\|}{y}
+\epsilon = \|\frac{y-\hat{y}}{y}\|
 $$
 * MSE should be applied for models built after data normalization as it is not scale-free.
